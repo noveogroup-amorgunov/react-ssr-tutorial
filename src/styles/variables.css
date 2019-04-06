@@ -1,0 +1,60 @@
+:root
+{
+    --color-text-main: #2d2d2d;
+    --color-text-secondary: #909090;
+    --color-text-heading: #000;
+    --color-text-invert: #fff;
+    --color-text-control: #000;
+    --color-text-status: #333;
+    --color-background-main: #fff;
+    --color-background-secondary: #eee;
+    --color-background-menu: #333;
+    --color-background-header: #e82b19;
+    --color-background-pinned: #f7f087;
+    --color-background-disabled: #ddd;
+    --color-control-active: #666;
+    --color-control-hover: #f5f5f5;
+    --color-control-outline: #ccc;
+    --color-link: #000;
+    --color-link-hover: #4d4d4d;
+    --color-link-grey: #808080;
+    --color-link-grey-hover: #999;
+    --color-link-action: #04b;
+    --color-link-action-hover: #e82b19;
+    --color-accent-main: #ffdb4d;
+    --color-separator: #e5e5e5;
+    --color-indicator-dark-green: #2db32d;
+    --color-indicator-green: #a8de00;
+    --color-indicator-red: #ff5959;
+    --color-indicator-dark-grey: #ccc;
+    --color-indicator-grey: #f5f5f5;
+    --color-indicator-white: #fff;
+    --color-status-ok: #2b992b;
+    --color-status-redo: #eb0c0c;
+    --color-status-active: #ffeba0;
+
+    --color-mobile-controls-background: #e6e6e6;
+
+    --yandex-sans: 'Yandex Sans Text Web', system-ui, sans-serif;
+
+    --heading-1-mobile: bold 24px/28px var(--yandex-sans);
+    --heading-2-mobile: bold 20px/24px var(--yandex-sans);
+    --heading-3-mobile: 500 18px/22px var(--yandex-sans);
+    --heading-4-mobile: 500 16px/20px var(--yandex-sans);
+    --heading-5-mobile: 500 14px/18px var(--yandex-sans);
+    --paragraph-mobile: normal 14/22px var(--yandex-sans);
+
+    --heading-1: bold 40px/44px var(--yandex-sans);
+    --heading-2: bold 32px/40px var(--yandex-sans);
+    --heading-3: bold 24px/32px var(--yandex-sans);
+    --heading-4: 500 20px/24px var(--yandex-sans);
+    --heading-5: 500 16px/20px var(--yandex-sans);
+    --paragraph-size-l-main: normal 16px/24px var(--yandex-sans);
+    --paragraph-size-m-main: normal 14px/24px var(--yandex-sans);
+    --paragraph-size-m-secondary: normal 14px/22px var(--yandex-sans);
+    --paragraph-size-s-secondary: normal 12px/18px var(--yandex-sans);
+    --text-size-m-secondary: normal 14px/18px var(--yandex-sans);
+    --text-size-s-secondary: normal 12px/16px var(--yandex-sans);
+
+    --content-max-width: 960px;
+}

@@ -1,0 +1,45 @@
+@import '~styles/media.css';
+
+.header {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 35px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.header__logo {
+    background-image: url("./logos.jpg");
+    width: 350px;
+    height: 140px;
+    background-position: center;
+    background-size: cover;
+
+    @media (--viewport-mobile)
+    {
+        width: auto;
+    }
+}
+
+.header__nav {
+}
+
+.header__nav-item {
+    margin-right: 15px;
+    color: #000;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+
+    &:hover {
+        border-bottom: 2px solid #777;
+        color: #aaa;
+     }
+
+    &_active {
+        border-bottom: 2px solid #777;
+        color: #aaa;
+    }
+}

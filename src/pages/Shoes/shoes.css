@@ -1,0 +1,34 @@
+.shoes-page__slider {
+  height: 230px;
+}
+
+.shoes-page__category {
+  margin-bottom: -15px;
+  color: #777;
+  font-weight: 500;
+}
+
+.shoes-page__image {
+  width: 230px;
+  height: 230px;
+  margin: 30px 15px;
+}
+
+.shoes-page__description {
+  color: #777;
+  padding: 40px 0;
+}
+
+.shoes-page .slick-prev:before, .shoes-page .slick-next:before {
+  color: #333 !important;
+}
+
+.shoes-page-stub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shoes-page-stub > .rect {
+  margin-bottom: 10px;
+}

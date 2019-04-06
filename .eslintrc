@@ -1,0 +1,15 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb"],
+  "rules": {
+    "indent": ["error", 4],
+    "react/jsx-indent": ["error", 4],
+    "react/jsx-indent-props": ["error", 4],
+    "comma-dangle": ["error", "never"],
+    "import/prefer-default-export": 0,
+    "no-use-before-define": 0,
+    "arrow-body-style": 0,
+    "no-underscore-dangle": 0,
+    "object-curly-newline": ["error", { "multiline": true, "minProperties": 5 }]
+  }
+}
