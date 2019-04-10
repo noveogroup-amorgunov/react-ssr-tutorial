@@ -1,10 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const WriteFilePlugin = require('write-file-webpack-plugin');
 
 const { IS_DEV, DIST_DIR, SRC_DIR } = require('./env');
 const fileLoader = require('./loaders/file');
@@ -18,14 +15,14 @@ module.exports = {
     ].filter(Boolean),
     module: {
         rules: [
-            fileLoader,
-            cssLoader,
-            jsLoader
+            fileLoader.client,
+            cssLoader.client,
+            jsLoader.client
         ]
     },
     output: {
         path: DIST_DIR,
-        filename: IS_DEV ? '[name].js' : '[name].[hash].js',
+        filename: '[name].js',
         publicPath: '/'
     },
     resolve: {
@@ -40,11 +37,8 @@ module.exports = {
         publicPath: '/'
     },
     plugins: [
-        new WriteFilePlugin(),
-        new CopyWebpackPlugin([{ from: 'static/images', to: 'images' }]),
-        new MiniCssExtractPlugin({ filename: IS_DEV ? '[name].css' : '[name].[hash].css' }),
-        IS_DEV && new webpack.HotModuleReplacementPlugin(),
-        new HtmlWebpackPlugin({ template: 'src/index.html' })
+        new MiniCssExtractPlugin({ filename: '[name].css' }),
+        IS_DEV && new webpack.HotModuleReplacementPlugin()
         // new BundleAnalyzerPlugin()
     ].filter(Boolean)
 };

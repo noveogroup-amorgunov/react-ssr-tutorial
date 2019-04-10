@@ -7,9 +7,10 @@ import 'babel-polyfill';
 import App from './components/App';
 import configureStore from './store/index';
 
-const { store, history } = configureStore();
+// eslint-disable-next-line no-undef
+const { store, history } = configureStore(window.__INITIAL_STATE__);
 
-ReactDOM.render(
+ReactDOM.hydrate(
     <ReduxProvider store={store}>
         <ConnectedRouter history={history}>
             <App />
