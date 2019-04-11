@@ -8,6 +8,8 @@ import Button from '../../components/Button';
 import Shoes from '../../components/Shoes';
 import PageMeta from '../../components/PageMeta';
 import ShoesStub from './shoes.stub';
+import { fetchHomepage } from '../../ducks/homepage/actions';
+import { fetchShoes as fetchPageData } from '../../ducks/shoes/actions';
 
 import './shoes.css';
 import 'slick-carousel/slick/slick.css';
@@ -51,6 +53,11 @@ class ShoesPage extends React.Component {
             params: PropTypes.shape({ slug: PropTypes.string }).isRequired
         }).isRequired
     };
+
+    static asyncFetchData({ dispatch, match }) {
+        dispatch(fetchPageData(match.params.slug));
+        dispatch(fetchHomepage());
+    }
 
     componentDidMount() {
         const { fetchShoes, match, data } = this.props;

@@ -1,5 +1,5 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
+import createSagaMiddleware, { END } from 'redux-saga';
 import { routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory, createMemoryHistory } from 'history';
 
@@ -41,6 +41,10 @@ export default function configureStore(initialState = {}, url = '/') {
     if (!isServer) {
         sagaMiddleware.run(rootSaga);
     }
+
+    // Path methods to store to use in the server
+    store.runSaga = sagaMiddleware.run;
+    store.close = () => store.dispatch(END);
 
     return { store, history };
 }

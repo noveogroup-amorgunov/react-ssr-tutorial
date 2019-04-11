@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import HomePage from '../../pages/Home';
-import UpcomingPage from '../../pages/Upcoming';
-import CatalogPage from '../../pages/Catalog';
-import ShoesPage from '../../pages/Shoes';
-import NotFoundPage from '../../pages/404';
+import routes from '../../routes';
 import Header from '../Header';
 import Footer from '../Footer';
 
@@ -15,16 +11,16 @@ export default class App extends Component {
         return true;
     }
 
+    static renderRoutes() {
+        return routes.map(route => <Route key={route.path} {...route} />);
+    }
+
     render() {
         return (
             <div className="app">
                 <Header />
                 <Switch>
-                    <Route path="/" exact component={HomePage} />
-                    <Route path="/upcoming" exact component={UpcomingPage} />
-                    <Route path="/catalog" exact component={CatalogPage} />
-                    <Route path="/shoes/:slug" exact component={ShoesPage} />
-                    <Route path="*" exact component={NotFoundPage} />
+                    {App.renderRoutes()}
                 </Switch>
                 <Footer />
             </div>

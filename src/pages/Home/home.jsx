@@ -6,6 +6,7 @@ import Button from '../../components/Button';
 import Shoes from '../../components/Shoes';
 import PageMeta from '../../components/PageMeta';
 import HomeStub from './home.stub';
+import { fetchHomepage as fetchPageData } from '../../ducks/homepage/actions';
 
 import './home.css';
 
@@ -18,6 +19,10 @@ class Home extends React.Component {
         fetchHomepage: PropTypes.func.isRequired,
         isLoading: PropTypes.bool.isRequired
     };
+
+    static asyncFetchData({ dispatch }) {
+        dispatch(fetchPageData());
+    }
 
     componentDidMount() {
         const { data, fetchHomepage } = this.props;
