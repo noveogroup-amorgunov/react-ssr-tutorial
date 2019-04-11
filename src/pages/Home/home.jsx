@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Button from '../../components/Button';
 import Shoes from '../../components/Shoes';
+import PageMeta from '../../components/PageMeta';
 import HomeStub from './home.stub';
 
 import './home.css';
@@ -35,6 +36,10 @@ class Home extends React.Component {
 
         return (
             <div className="page centering">
+                <PageMeta
+                    title="Home page"
+                    description="Buy awesome snickers"
+                />
                 <div className="container clear">
                     <h2>Popular</h2>
                     {data.popular.map(d => (

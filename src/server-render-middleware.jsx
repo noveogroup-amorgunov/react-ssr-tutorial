@@ -1,6 +1,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
+import Helmet from 'react-helmet';
 
 import { Provider as ReduxProvider } from 'react-redux';
 
@@ -23,6 +24,7 @@ export default (req, res) => {
 
     const reactDom = renderToString(jsx);
     const reduxState = store.getState();
+    const helmetData = Helmet.renderStatic();
 
     if (context.url) {
         res.redirect(context.url);
@@ -31,19 +33,21 @@ export default (req, res) => {
 
     res
         .status(context.status || 200)
-        .send(htmlTemplate(reactDom, reduxState));
+        .send(htmlTemplate(reactDom, reduxState, helmetData));
 };
 
-function htmlTemplate(reactDom, reduxState = {}) {
+function htmlTemplate(reactDom, reduxState = {}, helmetData) {
     return `
         <!DOCTYPE html>
         <html lang="en">
         <head>
-            <title>REACT SNICKERS</title>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
             <link href="/main.css" rel="stylesheet"></head>
+            
+            ${helmetData.title.toString()}
+            ${helmetData.meta.toString()}
         </head>
         <body>
             <div id="mount">${reactDom}</div>

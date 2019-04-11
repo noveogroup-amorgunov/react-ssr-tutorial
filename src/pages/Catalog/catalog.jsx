@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Shoes from '../../components/Shoes';
+import PageMeta from '../../components/PageMeta';
 import CatalogStub from './catalog.stub';
 
 import './catalog.css';
@@ -30,6 +31,10 @@ class Catalog extends React.Component {
 
         return (
             <div className="page centering">
+                <PageMeta
+                    title="Catalog page"
+                    description="See awesome collection of snickers"
+                />
                 <div className="container clear">
                     <h2>Catalog</h2>
                     {data.map(d => (

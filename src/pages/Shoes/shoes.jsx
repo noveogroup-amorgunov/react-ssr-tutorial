@@ -6,6 +6,7 @@ import b from 'b_';
 
 import Button from '../../components/Button';
 import Shoes from '../../components/Shoes';
+import PageMeta from '../../components/PageMeta';
 import ShoesStub from './shoes.stub';
 
 import './shoes.css';
@@ -46,7 +47,9 @@ class ShoesPage extends React.Component {
         fetchShoes: PropTypes.func.isRequired,
         isLoading: PropTypes.bool.isRequired,
         popular: PropTypes.arrayOf(PropTypes.object).isRequired,
-        match: PropTypes.object.isRequired // todo
+        match: PropTypes.shape({
+            params: PropTypes.shape({ slug: PropTypes.string }).isRequired
+        }).isRequired
     };
 
     componentDidMount() {
@@ -81,6 +84,12 @@ class ShoesPage extends React.Component {
 
         return (
             <div className={`page centering ${class_()}`}>
+                <PageMeta
+                    title={title}
+                    description={description}
+                    image={images[0]}
+                />
+
                 <div className="container clear">
                     <div className={class_('category')}>{category}</div>
                     <h1>{title}</h1>
