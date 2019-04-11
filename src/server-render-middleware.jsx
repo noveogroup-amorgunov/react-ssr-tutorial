@@ -1,27 +1,17 @@
-import path from 'path';
-import express from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 
 import { Provider as ReduxProvider } from 'react-redux';
-import 'babel-polyfill';
 
 import App from './components/App';
 import configureStore from './store';
 
-const app = express();
-
-// WARNING: Only for developing.
-// In production I recommend use nginx or CDN
-app.use(express.static(path.resolve(__dirname, '../dist')));
-app.use(express.static(path.resolve(__dirname, '../static')));
-
-app.get('/*', (req, res) => {
+export default (req, res) => {
     const location = req.url;
     const context = {};
 
-    const { store } = configureStore({});
+    const { store } = configureStore({}, location);
 
     const jsx = (
         <ReduxProvider store={store}>
@@ -35,7 +25,7 @@ app.get('/*', (req, res) => {
     const reduxState = store.getState();
 
     res.send(htmlTemplate(reactDom, reduxState));
-});
+};
 
 function htmlTemplate(reactDom, reduxState = {}) {
     return `
@@ -58,5 +48,3 @@ function htmlTemplate(reactDom, reduxState = {}) {
         </html>
     `;
 }
-
-export default app;

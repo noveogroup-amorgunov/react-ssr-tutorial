@@ -10,6 +10,7 @@ const jsLoader = require('./loaders/js');
 
 module.exports = {
     entry: [
+        IS_DEV && 'webpack-hot-middleware/client',
         IS_DEV && 'css-hot-loader/hotModuleReplacement',
         path.join(SRC_DIR, 'client')
     ].filter(Boolean),
@@ -27,7 +28,8 @@ module.exports = {
     },
     resolve: {
         modules: ['src', 'node_modules'],
-        extensions: ['*', '.js', '.jsx', '.json']
+        extensions: ['*', '.js', '.jsx', '.json'],
+        alias: { 'react-dom': '@hot-loader/react-dom' }
     },
     devServer: {
         contentBase: DIST_DIR,
