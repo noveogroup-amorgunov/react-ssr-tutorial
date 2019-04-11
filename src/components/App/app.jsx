@@ -4,6 +4,7 @@ import HomePage from '../../pages/Home';
 import UpcomingPage from '../../pages/Upcoming';
 import CatalogPage from '../../pages/Catalog';
 import ShoesPage from '../../pages/Shoes';
+import NotFoundPage from '../../pages/404';
 import Header from '../Header';
 import Footer from '../Footer';
 
@@ -23,6 +24,7 @@ export default class App extends Component {
                     <Route path="/upcoming" exact component={UpcomingPage} />
                     <Route path="/catalog" exact component={CatalogPage} />
                     <Route path="/shoes/:slug" exact component={ShoesPage} />
+                    <Route path="*" exact component={NotFoundPage} />
                 </Switch>
                 <Footer />
             </div>

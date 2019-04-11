@@ -24,7 +24,14 @@ export default (req, res) => {
     const reactDom = renderToString(jsx);
     const reduxState = store.getState();
 
-    res.send(htmlTemplate(reactDom, reduxState));
+    if (context.url) {
+        res.redirect(context.url);
+        return;
+    }
+
+    res
+        .status(context.status || 200)
+        .send(htmlTemplate(reactDom, reduxState));
 };
 
 function htmlTemplate(reactDom, reduxState = {}) {
