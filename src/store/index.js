@@ -42,6 +42,13 @@ export default function configureStore(initialState = {}, url = '/') {
         sagaMiddleware.run(rootSaga);
     }
 
+    // enable hot module reloading for reducers
+    if (module.hot) {
+        module.hot.accept('./rootReducer', () => {
+            store.replaceReducer(require('./rootReducer').default(createRootReducer(history)));
+        });
+    }
+
     // Path methods to store to use in the server
     store.runSaga = sagaMiddleware.run;
     store.close = () => store.dispatch(END);

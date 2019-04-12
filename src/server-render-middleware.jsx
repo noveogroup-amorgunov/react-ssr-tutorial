@@ -1,10 +1,12 @@
+import url from 'url';
+import path from 'path';
+
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter, matchPath } from 'react-router-dom';
-import Helmet from 'react-helmet';
-import url from 'url';
-
 import { Provider as ReduxProvider } from 'react-redux';
+import Helmet from 'react-helmet';
+import { ChunkExtractor } from '@loadable/server';
 
 import routes from './routes';
 import App from './components/App';
@@ -19,7 +21,10 @@ export default (req, res) => {
 
     // Run saga
     store.runSaga(rootSaga).toPromise().then(() => {
-        const jsx = (
+        const statsFile = path.resolve('./dist/loadable-stats.json');
+        const extractor = new ChunkExtractor({ statsFile });
+
+        const jsx = extractor.collectChunks(
             <ReduxProvider store={store}>
                 <StaticRouter context={context} location={location}>
                     <App />
@@ -38,7 +43,7 @@ export default (req, res) => {
 
         res
             .status(context.status || 200)
-            .send(htmlTemplate(reactDom, reduxState, helmetData));
+            .send(htmlTemplate(reactDom, reduxState, helmetData, extractor));
     }).catch((err) => {
         console.error(err);
         throw err;
@@ -57,10 +62,14 @@ export default (req, res) => {
         const match = matchPath(url.parse(location).pathname, route);
         const { component } = route;
 
+        if (!match) {
+            return false;
+        }
+
         const fetchMethod = component.asyncFetchData
             || (component.WrappedComponent && component.WrappedComponent.asyncFetchData);
 
-        if (match && fetchMethod) {
+        if (fetchMethod) {
             dataRequirements.push(fetchMethod({
                 dispatch: store.dispatch,
                 match
@@ -80,25 +89,31 @@ export default (req, res) => {
         });
 };
 
-function htmlTemplate(reactDom, reduxState = {}, helmetData) {
+function htmlTemplate(reactDom, reduxState = {}, helmetData, extractor) {
+    const scriptTags = extractor.getScriptTags();
+    const linkTags = extractor.getLinkTags();
+    const styleTags = extractor.getStyleTags();
+
     return `
         <!DOCTYPE html>
         <html lang="en">
         <head>
             <meta charset="UTF-8">
+            <meta name="google-site-verification" content="nLL5VlSAgcKL756luG6o6UwKcvR8miU2duRnhU-agmE" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <link href="/main.css" rel="stylesheet"></head>
-            
+            <link rel="shortcut icon" href="/favicon.png">
             ${helmetData.title.toString()}
             ${helmetData.meta.toString()}
+            ${linkTags}
+            ${styleTags}
         </head>
         <body>
             <div id="mount">${reactDom}</div>
             <script>
                 window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
             </script>
-            <script src="/main.js"></script>
+            ${scriptTags}
         </body>
         </html>
     `;

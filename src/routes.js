@@ -1,8 +1,10 @@
-import CatalogPage from './pages/Catalog';
-import UpcomingPage from './pages/Upcoming';
-import ShoesPage from './pages/Shoes';
-import HomePage from './pages/Home';
-import NotFoundPage from './pages/404';
+import loadable from '@loadable/component';
+
+const CatalogPage = loadable(() => import('./pages/Catalog'));
+const UpcomingPage = loadable(() => import('./pages/Upcoming'));
+const ShoesPage = loadable(() => import('./pages/Shoes'));
+const HomePage = loadable(() => import('./pages/Home'));
+const NotFoundPage = loadable(() => import('./pages/404'));
 
 /**
  * Routes are moved to a separate file,

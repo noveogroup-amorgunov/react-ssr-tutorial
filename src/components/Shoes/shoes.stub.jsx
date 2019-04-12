@@ -5,9 +5,9 @@ import './shoes.css';
 
 const ShoesStub = () => (
     <div className="shoes-stub">
-        <Rect height="210px" width="220" />
-        <Rect type="black" height="20px" width="220" />
-        <Rect height="15px" width="160" />
+        <Rect height="210px" width="220px" />
+        <Rect type="black" height="20px" width="220px" />
+        <Rect height="15px" width="160px" />
     </div>
 );
 

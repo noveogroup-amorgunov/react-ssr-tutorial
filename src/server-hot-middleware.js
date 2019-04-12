@@ -10,7 +10,10 @@ const compiler = webpack({ ...webpackConfig, mode: 'development' });
 export default [
     devMiddleware(compiler, {
         logLevel: 'error',
-        publicPath: webpackConfig.output.publicPath
+        publicPath: webpackConfig.output.publicPath,
+        writeToDisk(filePath) {
+            return /loadable-stats/.test(filePath);
+        }
     }),
     hotMiddleware(compiler),
     renderMiddleware

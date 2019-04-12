@@ -2,6 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 
 const { IS_DEV, DIST_DIR, SRC_DIR } = require('./env');
 const fileLoader = require('./loaders/file');
@@ -40,7 +42,9 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({ filename: '[name].css' }),
-        IS_DEV && new webpack.HotModuleReplacementPlugin()
+        IS_DEV && new webpack.HotModuleReplacementPlugin(),
+        !IS_DEV && new CompressionPlugin(),
+        new LoadablePlugin()
         // new BundleAnalyzerPlugin()
     ].filter(Boolean)
 };
