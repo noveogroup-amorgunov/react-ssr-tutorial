@@ -45,6 +45,7 @@ export default function configureStore(initialState = {}, url = '/') {
     // enable hot module reloading for reducers
     if (module.hot) {
         module.hot.accept('./rootReducer', () => {
+            // eslint-disable-next-line global-require
             store.replaceReducer(require('./rootReducer').default(createRootReducer(history)));
         });
     }

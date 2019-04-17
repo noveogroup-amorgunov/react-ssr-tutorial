@@ -6,6 +6,7 @@ html, body, #mount {
 
     display: flex;
     width: 100%;
+    min-height: 100%;
 }
 
 html {
@@ -29,6 +30,7 @@ html {
 
 .app .page {
     flex: 1 0 auto;
+    flex-grow: 1;
 }
 
 .container {
