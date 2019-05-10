@@ -11,7 +11,7 @@ See live demo: [http://bit.do/react-ssr-demo](http://bit.do/react-ssr-demo).
 - :koala: Actual stack: React 16.8 + Redux+saga / Babel7 / Webpack 4 / postcss / eslint
 - :panda_face: Step by step branches
 - :pig: Async fetch data on server + code splitting by loadable-components
-- :ru: [Google Slides](bit.do/react-ssr-slides) about server side rendering
+- :ru: [Slides](https://bit.do/react-ssr-slides) about server side rendering
 
 ## Getting started
 

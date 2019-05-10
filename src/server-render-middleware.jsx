@@ -32,7 +32,7 @@ export default (req, res) => {
             </ReduxProvider>
         );
 
-        const reactDom = renderToString(jsx);
+        const reactHtml = renderToString(jsx);
         const reduxState = store.getState();
         const helmetData = Helmet.renderStatic();
 
@@ -43,7 +43,7 @@ export default (req, res) => {
 
         res
             .status(context.status || 200)
-            .send(htmlTemplate(reactDom, reduxState, helmetData, extractor));
+            .send(htmlTemplate(reactHtml, reduxState, helmetData, extractor));
     }).catch((err) => {
         console.error(err);
         throw err;
@@ -89,7 +89,7 @@ export default (req, res) => {
         });
 };
 
-function htmlTemplate(reactDom, reduxState = {}, helmetData, extractor) {
+function htmlTemplate(reactHtml, reduxState = {}, helmetData, extractor) {
     const scriptTags = extractor.getScriptTags();
     const linkTags = extractor.getLinkTags();
     const styleTags = extractor.getStyleTags();
@@ -109,7 +109,7 @@ function htmlTemplate(reactDom, reduxState = {}, helmetData, extractor) {
             ${styleTags}
         </head>
         <body>
-            <div id="mount">${reactDom}</div>
+            <div id="mount">${reactHtml}</div>
             <script>
                 window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
             </script>

@@ -1,3 +1,9 @@
+@import '~styles/media.css';
+
 .home-stub > div {
   float: left;
+
+  @media (--viewport-mobile) {
+    float: none;
+  }
 }

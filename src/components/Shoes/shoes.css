@@ -1,3 +1,5 @@
+@import '~styles/media.css';
+
 .shoes a {
   color: inherit;
   text-decoration: none;
@@ -12,6 +14,12 @@
   position: relative;
   width: 250px;
   height: 280px;
+
+  @media (--viewport-mobile) {
+    margin: 5px auto;
+    width: 220px;
+    float: none;
+  }
 }
 
 .shoes__image {
@@ -37,4 +45,8 @@
 
 .shoes-stub .rect {
   margin-bottom: 10px;
+
+  @media (--viewport-mobile) {
+    margin: 10px auto;
+  }
 }
