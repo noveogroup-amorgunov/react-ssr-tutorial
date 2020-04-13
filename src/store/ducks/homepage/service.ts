@@ -1,11 +1,5 @@
 import { serializer as shoesSerializer } from '../shoes/service';
-
-const timeout = (ms: number) =>
-    new Promise(resolve => {
-        setTimeout(() => {
-            resolve();
-        }, ms);
-    });
+import { timeout } from '../timeoutHelper';
 
 // Emulate api request
 export const fetchHomepage = () =>

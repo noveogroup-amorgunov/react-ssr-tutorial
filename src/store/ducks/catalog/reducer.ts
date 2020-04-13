@@ -1,4 +1,3 @@
-import * as types from './types';
 import {
     CatalogActionTypes,
     FETCH_CATALOG,

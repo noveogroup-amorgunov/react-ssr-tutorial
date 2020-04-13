@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:12
 
 COPY node_modules /app/node_modules
 COPY dist /app/dist

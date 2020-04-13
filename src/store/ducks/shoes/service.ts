@@ -1,3 +1,4 @@
+import { timeout } from '../timeoutHelper';
 // @ts-ignore
 import mock from './mock.json';
 
@@ -19,8 +20,4 @@ export const serializer = (data: any) => {
 
 // Emulate api request
 export const fetchShoes = (slug: string) =>
-    new Promise(resolve =>
-        setTimeout(() => {
-            resolve(serializer({ ...mock, slug }));
-        }, 500)
-    );
+    timeout(500).then(() => serializer({ ...mock, slug }));
