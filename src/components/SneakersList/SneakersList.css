@@ -1,0 +1,15 @@
+@import '~styles/media.css';
+
+.sneakers-list-stub {
+  padding-top: 8px;
+}
+
+.sneakers-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  @media (--viewport-mobile) {
+    justify-content: space-around;
+  }
+}

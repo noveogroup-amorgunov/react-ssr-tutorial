@@ -1,0 +1,44 @@
+@import '~styles/media.css';
+
+.page {
+  flex: 1 0 auto;
+  flex-grow: 1;
+
+  &_align_center {
+    text-align: center;
+  }
+
+  &__container {
+    max-width: 760px;
+    margin: 25px auto 80px;
+
+    @media (--viewport-mobile) {
+      padding: 0 15px;
+    }
+
+    &_clear::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+  }
+
+  &__container-more {
+    margin-top: 40px;
+  }
+
+  &__container h2 {
+    text-align: left;
+    padding-left: 10px;
+
+    @media (--viewport-mobile) {
+      text-align: center;
+    }
+
+    > .rect {
+      @media (--viewport-mobile) {
+        margin: 0 auto;
+      }
+    }
+  }
+}
