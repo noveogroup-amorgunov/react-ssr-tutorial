@@ -1,0 +1,34 @@
+.sneakers-page__slider {
+  height: 230px;
+}
+
+.sneakers-page__category {
+  margin-bottom: -15px;
+  color: #777;
+  font-weight: 500;
+}
+
+.sneakers-page__image {
+  width: 230px;
+  height: 230px;
+  margin: 30px 15px;
+}
+
+.sneakers-page__description {
+  color: #777;
+  padding: 40px 0;
+}
+
+.sneakers-page .slick-prev:before, .sneakers-page .slick-next:before {
+  color: #333 !important;
+}
+
+.sneakers-page-stub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sneakers-page-stub > .rect {
+  margin-bottom: 10px;
+}

@@ -1,0 +1,26 @@
+.button {
+  display: inline-block;
+  border: 3px solid #c4c4c4;
+  border-radius: 20px;
+  padding: 10px 20px;
+  color: #000;
+  cursor: pointer;
+  background: transparent;
+  font-size: 16px;
+  margin-bottom: 5px;
+  transition: all .1s ease;
+
+  &:hover {
+    border: 3px solid #ff5c28;
+  }
+
+  &_size_xl {
+    font-size: 26px;
+    padding: 15px 30px;
+    border-radius: 30px;
+  }
+
+  &_size_xs {
+    font-size: 12px;
+  }
+}

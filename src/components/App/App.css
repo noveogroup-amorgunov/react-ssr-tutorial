@@ -1,0 +1,12 @@
+@import '~styles/base.css';
+
+.app {
+    width: 100%;
+    color: #000;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+
+    display: flex;
+
+    flex-direction: column;
+    flex: 1 1;
+}

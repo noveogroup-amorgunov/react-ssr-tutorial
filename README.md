@@ -1,7 +1,3 @@
-# react-ssr-tutorial
+# React Server Side Rendering Tutorial
 
-![](https://github.com/noveogroup-amorgunov/react-ssr-tutorial/raw/master/preview.gif)
-
-:rocket: Integrate server side rendering to react application.
-
-...
+Client side version of the application.

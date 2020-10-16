@@ -1,0 +1,20 @@
+html, body, #mount {
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+a {
+    color: #777;
+
+    &:hover {
+        color: #ff5c28;
+    }
+}

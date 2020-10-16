@@ -1,0 +1,41 @@
+@import '~styles/media.css';
+
+.header {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 35px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.header__logo {
+    background-image: url("./logo.jpg");
+    width: 100px;
+    height: 120px;
+    background-position: center;
+    background-size: cover;
+    margin: 0 auto;
+    margin-bottom: 25px;
+}
+
+.header__nav {
+}
+
+.header__nav-item {
+    margin-right: 15px;
+    font-weight: bold;
+    color: #000;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+
+    &:hover {
+        color: #aaa;
+     }
+
+    &_active {
+        color: #aaa;
+    }
+}
