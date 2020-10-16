@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render } from 'react-dom';
+import { hydrate } from 'react-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { Provider as ReduxProvider } from 'react-redux';
 import 'babel-polyfill';
@@ -16,7 +16,7 @@ declare global {
     }
 }
 
-render(
+hydrate(
     <ReduxProvider store={store}>
         <ConnectedRouter history={history}>
             <App />

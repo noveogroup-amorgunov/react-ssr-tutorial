@@ -2,7 +2,9 @@
 
 ![](https://github.com/noveogroup-amorgunov/react-ssr-tutorial/raw/client-side-version/static/images/favicon.png)
 
-Client side version of the application.
+**Branch**: 01-prepare-webpack-and-express-server
+
+First server side version of the application.
 
 ### Getting started
 
@@ -18,9 +20,9 @@ Run development mode:
 npm start
 ```
 
-Now application is available in [http://localhost:9000](http://localhost:9000).
+Now application is available in [http://localhost:9001](http://localhost:9001).
 
-Build production bundle and start server:
+Build production bundle:
 
 ```
 npm run build

@@ -5,4 +5,8 @@ export default {
         loader: 'url-loader',
         test: fileRegex,
     },
+    server: {
+        loader: 'null-loader',
+        test: fileRegex,
+    },
 };

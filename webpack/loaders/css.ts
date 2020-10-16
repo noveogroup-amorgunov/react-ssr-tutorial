@@ -37,4 +37,8 @@ export default {
             },
         ].filter(Boolean),
     },
+    server: {
+        test: /\.css$/,
+        loader: 'null-loader',
+    },
 };
