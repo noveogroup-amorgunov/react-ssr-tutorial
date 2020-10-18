@@ -24,7 +24,7 @@ const config: Config = {
         path.join(SRC_DIR, 'client'),
     ].filter(Boolean) as unknown) as Entry,
     module: {
-        rules: [fileLoader, cssLoader, jsLoader],
+        rules: [fileLoader.client, cssLoader.client, jsLoader.client],
     },
     output: {
         path: DIST_DIR,

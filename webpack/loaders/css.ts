@@ -14,23 +14,27 @@ const resolverOptions = {
 };
 
 export default {
-    test: /\.css$/,
-    use: [
-        IS_DEV && 'css-hot-loader',
-        MiniCssExtractPlugin.loader,
-        'css-loader',
-        {
-            loader: 'postcss-loader',
-            options: {
-                plugins: [
-                    postcssImport({
-                        resolve: postcssImportAliasResolver(resolverOptions),
-                    }),
-                    postcssCustomMedia(),
-                    postcssNested(),
-                    !IS_DEV && cssnano({ preset: 'default' }),
-                ].filter(Boolean),
+    client: {
+        test: /\.css$/,
+        use: [
+            IS_DEV && 'css-hot-loader',
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            {
+                loader: 'postcss-loader',
+                options: {
+                    plugins: [
+                        postcssImport({
+                            resolve: postcssImportAliasResolver(
+                                resolverOptions
+                            ),
+                        }),
+                        postcssCustomMedia(),
+                        postcssNested(),
+                        !IS_DEV && cssnano({ preset: 'default' }),
+                    ].filter(Boolean),
+                },
             },
-        },
-    ].filter(Boolean),
+        ].filter(Boolean),
+    },
 };
