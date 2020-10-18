@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, RouteComponentProps } from 'react-router-dom';
 import { Page, PageContainer } from 'components';
 
 type Props = {
@@ -10,10 +10,9 @@ type Props = {
 // Component is used for passing http status for server side rendering;
 // For example, if page isn't found, client give page with 404 status code
 const Status = ({ code, children }: Props) => {
-    const render = ({ staticContext }: any) => {
+    const render = ({ staticContext }: RouteComponentProps) => {
         if (staticContext) {
-            // eslint-disable-next-line no-param-reassign
-            staticContext.status = code;
+            staticContext.statusCode = code;
         }
 
         return children;

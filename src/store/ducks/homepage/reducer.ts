@@ -16,7 +16,7 @@ export interface HomepageState {
     readonly error?: string;
 }
 
-const initialState: HomepageState = {
+export const initialState: HomepageState = {
     data: {
         popular: [],
         newest: [],

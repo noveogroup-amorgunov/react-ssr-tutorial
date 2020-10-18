@@ -5,13 +5,15 @@ import { Provider as ReduxProvider } from 'react-redux';
 import 'babel-polyfill';
 
 import { App } from 'components';
+import { State } from 'types';
 import { configureStore } from './store/rootStore';
 
-const { store, history } = configureStore();
+const { store, history } = configureStore(window.__INITIAL_STATE__);
 
 // global redeclared types
 declare global {
     interface Window {
+        __INITIAL_STATE__: State;
         __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: Function;
     }
 }

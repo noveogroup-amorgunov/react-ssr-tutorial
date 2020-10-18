@@ -2,9 +2,9 @@
 
 ![](https://github.com/noveogroup-amorgunov/react-ssr-tutorial/raw/client-side-version/static/images/favicon.png)
 
-**Branch**: 01-prepare-webpack-and-express-server
+**Branch**: 02-add-redux-and-react-router
 
-First server side version of the application.
+Server side version of the application with react-router and redux state.
 
 ### Getting started
 

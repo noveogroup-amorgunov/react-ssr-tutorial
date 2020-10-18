@@ -13,7 +13,7 @@ export interface CatalogState {
     readonly error?: string;
 }
 
-const initialState: CatalogState = {
+export const initialState: CatalogState = {
     data: [],
     isLoading: false,
     error: undefined,

@@ -1,16 +1,37 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Request, Response } from 'express';
+import { StaticRouter } from 'react-router-dom';
+import { StaticRouterContext } from 'react-router';
+import { Provider as ReduxProvider } from 'react-redux';
 import { App } from './components/App/App';
+import { configureStore } from './store/rootStore';
+import { getInitialState } from './store/getInitialState';
 
 export default (req: Request, res: Response) => {
-    const jsx = <App />;
-    const reactHtml = renderToString(jsx);
+    const location = req.url;
+    const context: StaticRouterContext = {};
+    const { store } = configureStore(getInitialState(location), location);
 
-    res.send(getHtml(reactHtml));
+    const jsx = (
+        <ReduxProvider store={store}>
+            <StaticRouter context={context} location={location}>
+                <App />
+            </StaticRouter>
+        </ReduxProvider>
+    );
+    const reactHtml = renderToString(jsx);
+    const reduxState = store.getState();
+
+    if (context.url) {
+        res.redirect(context.url);
+        return;
+    }
+
+    res.status(context.statusCode || 200).send(getHtml(reactHtml, reduxState));
 };
 
-function getHtml(reactHtml: string) {
+function getHtml(reactHtml: string, reduxState = {}) {
     return `
         <!DOCTYPE html>
         <html lang="en">
@@ -25,6 +46,9 @@ function getHtml(reactHtml: string) {
         </head>
         <body>
             <div id="mount">${reactHtml}</div>
+            <script>
+                window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
+            </script>
             <script src="/main.js"></script>
         </body>
         </html>

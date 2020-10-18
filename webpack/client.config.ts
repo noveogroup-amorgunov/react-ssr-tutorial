@@ -12,7 +12,7 @@ import jsLoader from './loaders/js';
 const config: Configuration = {
     entry: ([
         IS_DEV && 'react-hot-loader/patch',
-        IS_DEV && 'webpack-hot-middleware/client',
+        // IS_DEV && 'webpack-hot-middleware/client',
         IS_DEV && 'css-hot-loader/hotModuleReplacement',
         path.join(SRC_DIR, 'client'),
     ].filter(Boolean) as unknown) as Entry,

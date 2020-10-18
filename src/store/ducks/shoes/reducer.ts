@@ -13,7 +13,7 @@ export interface ShoesState {
     readonly error?: string;
 }
 
-const initialState: ShoesState = {
+export const initialState: ShoesState = {
     data: undefined,
     isLoading: false,
     error: undefined,
