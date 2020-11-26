@@ -2,9 +2,9 @@
 
 ![](https://github.com/noveogroup-amorgunov/react-ssr-tutorial/raw/client-side-version/static/images/favicon.png)
 
-**Branch**: 02-add-redux-and-react-router
+**Branch**: 03-add-react-helmet
 
-Server side version of the application with react-router and redux state.
+Server side version of the application with react-router, redux state and react-helmet.
 
 ### Getting started
 

@@ -6,7 +6,7 @@
     },
     "scripts": {
         "clean": "rimraf dist",
-        "build": "NODE_ENV=production NODE_PATH=. npm run clean && webpack --mode production --config webpack/client.config.ts",
+        "build": "NODE_ENV=production NODE_PATH=. npm run clean && webpack --mode production",
         "format": "prettier --write \"src/**/*.{ts,tsx}\" \"webpack/**/*.ts\"",
         "check-types": "tsc --noEmit",
         "start:webpack": "webpack --mode=development --watch",
@@ -32,6 +32,7 @@
         "redux": "4.0.1",
         "redux-saga": "1.0.2",
         "slick-carousel": "1.8.1",
+        "webpack-dev-middleware": "3.7.2",
         "webpack-hot-middleware": "2.24.3"
     },
     "devDependencies": {
