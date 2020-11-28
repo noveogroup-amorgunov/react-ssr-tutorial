@@ -52,4 +52,7 @@ const mapStateToProps = (state: State) => ({
 });
 const mapDispatchToProps = { fetchHomepage };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Home) as React.ComponentType<Props>;

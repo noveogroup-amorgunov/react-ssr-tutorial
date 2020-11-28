@@ -35,6 +35,10 @@ export function configureStore(initialState: State, url = '/') {
         composeEnhancers(applyMiddleware(...middlewares))
     ) as AppStore;
 
+    // Add methods to use in the server
+    store.runSaga = sagaMiddleware.run;
+    store.close = () => store.dispatch(END);
+
     if (!isServer) {
         sagaMiddleware.run(rootSaga);
     }

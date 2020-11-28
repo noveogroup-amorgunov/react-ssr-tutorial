@@ -77,7 +77,7 @@ function SneakersPage() {
 
             <PageContainer>
                 <div className={b('category')}>{category}</div>
-                <h1>{title}1125111</h1>
+                <h1>{title}</h1>
                 <strong>{price}</strong>
                 <Slider {...settings}>
                     {images.map(url => (

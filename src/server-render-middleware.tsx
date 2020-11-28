@@ -1,38 +1,87 @@
+import url from 'url';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Request, Response } from 'express';
-import { StaticRouter } from 'react-router-dom';
+import { StaticRouter, matchPath } from 'react-router-dom';
 import { StaticRouterContext } from 'react-router';
 import { Provider as ReduxProvider } from 'react-redux';
 import Helmet, { HelmetData } from 'react-helmet';
 import { App } from './components/App/App';
 import { configureStore } from './store/rootStore';
+import rootSaga from './store/rootSaga';
 import { getInitialState } from './store/getInitialState';
+import routes from './routes';
 
 export default (req: Request, res: Response) => {
     const location = req.url;
     const context: StaticRouterContext = {};
     const { store } = configureStore(getInitialState(location), location);
 
-    const jsx = (
-        <ReduxProvider store={store}>
-            <StaticRouter context={context} location={location}>
-                <App />
-            </StaticRouter>
-        </ReduxProvider>
-    );
-    const reactHtml = renderToString(jsx);
-    const reduxState = store.getState();
-    const helmetData = Helmet.renderStatic();
+    function renderApp() {
+        const jsx = (
+            <ReduxProvider store={store}>
+                <StaticRouter context={context} location={location}>
+                    <App />
+                </StaticRouter>
+            </ReduxProvider>
+        );
+        const reactHtml = renderToString(jsx);
+        const reduxState = store.getState();
+        const helmetData = Helmet.renderStatic();
 
-    if (context.url) {
-        res.redirect(context.url);
-        return;
+        if (context.url) {
+            res.redirect(context.url);
+            return;
+        }
+
+        res.status(context.statusCode || 200).send(
+            getHtml(reactHtml, reduxState, helmetData)
+        );
     }
 
-    res.status(context.statusCode || 200).send(
-        getHtml(reactHtml, reduxState, helmetData)
-    );
+    store
+        .runSaga(rootSaga)
+        .toPromise()
+        .then(() => renderApp())
+        .catch(err => {
+            throw err;
+        });
+
+    const dataRequirements: (Promise<void> | void)[] = [];
+
+    /**
+     * Call the fetchData method on the component-page
+     * that corresponds to the current url (by router).
+     *
+     * We use `some` method to simulate working of the routes in react-router-dom
+     * inside the Switch — selects the first found route.
+     */
+    routes.some(route => {
+        const { fetchData: fetchMethod } = route;
+        const match = matchPath<{ slug: string }>(
+            url.parse(location).pathname,
+            route
+        );
+
+        if (match && fetchMethod) {
+            dataRequirements.push(
+                fetchMethod({
+                    dispatch: store.dispatch,
+                    match,
+                })
+            );
+        }
+
+        return Boolean(match);
+    });
+
+    // When all async actions will be finished,
+    // dispatch action END to close saga
+    return Promise.all(dataRequirements)
+        .then(() => store.close())
+        .catch(err => {
+            throw err;
+        });
 };
 
 function getHtml(reactHtml: string, reduxState = {}, helmetData: HelmetData) {

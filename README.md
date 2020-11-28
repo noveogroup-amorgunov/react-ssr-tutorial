@@ -2,9 +2,9 @@
 
 ![](https://github.com/noveogroup-amorgunov/react-ssr-tutorial/raw/client-side-version/static/images/favicon.png)
 
-**Branch**: 03-add-react-helmet
+**Branch**: 04-add-redux-saga-and-async-data
 
-Server side version of the application with react-router, redux state and react-helmet.
+Server side version of the application with react-router, redux state, react-helmet and redux-saga.
 
 ### Getting started
 

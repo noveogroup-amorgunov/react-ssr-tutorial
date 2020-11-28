@@ -45,4 +45,7 @@ const mapStateToProps = (state: State) => ({
 });
 const mapDispatchToProps = { fetchCatalog };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Catalog);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Catalog) as React.ComponentType;
