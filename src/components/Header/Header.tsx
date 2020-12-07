@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
+import loadable from '@loadable/component';
 import * as bem from 'b_';
 
 import './Header.css';
@@ -16,6 +17,9 @@ const menu = [
     { to: '/upcoming', exact: true, page: PageName.Upcoming },
 ];
 
+const preloadPage = (pageName: string) =>
+    loadable(() => import(`../../pages/${pageName}/${pageName}`));
+
 const b = bem.with('header');
 
 export function Header() {
@@ -30,6 +34,7 @@ export function Header() {
                         activeClassName="header__nav-item_active"
                         to={data.to}
                         className={b('nav-item')}
+                        onMouseMove={() => preloadPage(data.page).preload()}
                     >
                         {data.page}
                     </NavLink>

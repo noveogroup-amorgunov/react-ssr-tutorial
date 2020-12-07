@@ -3,6 +3,7 @@ import { Configuration, Plugin, Entry } from 'webpack';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
+import LoadablePlugin from '@loadable/webpack-plugin';
 
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
 import fileLoader from './loaders/file';
@@ -33,6 +34,7 @@ const config: Configuration = {
     plugins: [
         new MiniCssExtractPlugin({ filename: '[name].css' }),
         !IS_DEV && new CompressionPlugin(),
+        new LoadablePlugin(),
     ].filter(Boolean) as Plugin[],
 
     devtool: 'source-map',

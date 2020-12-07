@@ -1,13 +1,14 @@
+import loadable from '@loadable/component';
 import { fetchCatalog } from 'store/ducks/catalog/actions';
 import { fetchHomepage } from 'store/ducks/homepage/actions';
 import { fetchShoes } from 'store/ducks/shoes/actions';
 import { RouterFetchDataArgs } from 'types';
 
-import CatalogPage from 'pages/Catalog/Catalog';
-import UpcomingPage from 'pages/Upcoming/Upcoming';
-import SneakersPage from 'pages/Sneakers/Sneakers';
-import HomePage from 'pages/Home/Home';
-import NotFoundPage from 'pages/404/404';
+const CatalogPage = loadable(() => import('./pages/Catalog/Catalog'));
+const UpcomingPage = loadable(() => import('./pages/Upcoming/Upcoming'));
+const SneakersPage = loadable(() => import('./pages/Sneakers/Sneakers'));
+const HomePage = loadable(() => import('./pages/Home/Home'));
+const NotFoundPage = loadable(() => import('./pages/404/404'));
 
 /**
  * Routes are moved to a separate file,

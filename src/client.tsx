@@ -2,6 +2,7 @@ import * as React from 'react';
 import { hydrate } from 'react-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { Provider as ReduxProvider } from 'react-redux';
+import { loadableReady } from '@loadable/component';
 import 'babel-polyfill';
 
 import { App } from 'components';
@@ -18,11 +19,13 @@ declare global {
     }
 }
 
-hydrate(
-    <ReduxProvider store={store}>
-        <ConnectedRouter history={history}>
-            <App />
-        </ConnectedRouter>
-    </ReduxProvider>,
-    document.getElementById('mount')
-);
+loadableReady(() => {
+    hydrate(
+        <ReduxProvider store={store}>
+            <ConnectedRouter history={history}>
+                <App />
+            </ConnectedRouter>
+        </ReduxProvider>,
+        document.getElementById('mount')
+    );
+});

@@ -2,9 +2,9 @@
 
 ![](https://github.com/noveogroup-amorgunov/react-ssr-tutorial/raw/client-side-version/static/images/favicon.png)
 
-**Branch**: 04-add-redux-saga-and-async-data
+**Branch**: 05-add-code-splitting
 
-Server side version of the application with react-router, redux state, react-helmet and redux-saga.
+Server side version of the application with react-router, redux state, react-helmet, redux-saga and code-splitting.
 
 ### Getting started
 

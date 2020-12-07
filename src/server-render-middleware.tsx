@@ -1,4 +1,5 @@
 import url from 'url';
+import path from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Request, Response } from 'express';
@@ -6,6 +7,7 @@ import { StaticRouter, matchPath } from 'react-router-dom';
 import { StaticRouterContext } from 'react-router';
 import { Provider as ReduxProvider } from 'react-redux';
 import Helmet, { HelmetData } from 'react-helmet';
+import { ChunkExtractor } from '@loadable/server';
 import { App } from './components/App/App';
 import { configureStore } from './store/rootStore';
 import rootSaga from './store/rootSaga';
@@ -18,7 +20,10 @@ export default (req: Request, res: Response) => {
     const { store } = configureStore(getInitialState(location), location);
 
     function renderApp() {
-        const jsx = (
+        const statsFile = path.resolve('./dist/loadable-stats.json');
+        const chunkExtractor = new ChunkExtractor({ statsFile });
+
+        const jsx = chunkExtractor.collectChunks(
             <ReduxProvider store={store}>
                 <StaticRouter context={context} location={location}>
                     <App />
@@ -35,7 +40,7 @@ export default (req: Request, res: Response) => {
         }
 
         res.status(context.statusCode || 200).send(
-            getHtml(reactHtml, reduxState, helmetData)
+            getHtml(reactHtml, reduxState, helmetData, chunkExtractor)
         );
     }
 
@@ -84,7 +89,16 @@ export default (req: Request, res: Response) => {
         });
 };
 
-function getHtml(reactHtml: string, reduxState = {}, helmetData: HelmetData) {
+function getHtml(
+    reactHtml: string,
+    reduxState = {},
+    helmetData: HelmetData,
+    chunkExtractor: ChunkExtractor
+) {
+    const scriptTags = chunkExtractor.getScriptTags();
+    const linkTags = chunkExtractor.getLinkTags();
+    const styleTags = chunkExtractor.getStyleTags();
+
     return `
         <!DOCTYPE html>
         <html lang="en">
@@ -94,16 +108,17 @@ function getHtml(reactHtml: string, reduxState = {}, helmetData: HelmetData) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
             <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
-            <link href="/main.css" rel="stylesheet">
             ${helmetData.title.toString()}
             ${helmetData.meta.toString()}
+            ${linkTags}
+            ${styleTags}
         </head>
         <body>
             <div id="mount">${reactHtml}</div>
             <script>
                 window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
             </script>
-            <script src="/main.js"></script>
+            ${scriptTags}
         </body>
         </html>
     `;
