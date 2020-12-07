@@ -11,7 +11,16 @@
         "check-types": "tsc --noEmit",
         "start:webpack": "webpack --mode=development --watch",
         "start:server": "nodemon index.js --watch dist/server.js",
-        "start": "NODE_ENV=development npm-run-all --print-label --parallel start:*"
+        "start": "NODE_ENV=development npm-run-all --print-label --parallel start:*",
+        "docker:build": "docker build -t $npm_package_name .",
+        "docker:run": "docker run -p 9001:80 $npm_package_name",
+        "docker": "npm-run-all docker:*",
+        "heroku:login": "heroku container:login",
+        "heroku:push": "heroku container:push web",
+        "heroku:release": "heroku container:release web",
+        "heroku:open": "heroku open",
+        "heroku": "npm-run-all heroku:*",
+        "heroku-init": "heroku login && heroku create $npm_package_name"
     },
     "dependencies": {
         "@hot-loader/react-dom": "16.8.4",
