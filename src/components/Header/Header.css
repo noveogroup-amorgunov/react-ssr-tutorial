@@ -1,4 +1,4 @@
-@import '~styles/media.css';
+@import 'media.css';
 
 .header {
     max-width: 800px;
@@ -10,7 +10,7 @@
 }
 
 .header__logo {
-    background-image: url("./logo.jpg");
+    background-image: url('./logo.jpg');
     width: 100px;
     height: 120px;
     background-position: center;
@@ -29,11 +29,11 @@
     font-size: 16px;
     text-decoration: none;
     text-transform: uppercase;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
     &:hover {
         color: #aaa;
-     }
+    }
 
     &_active {
         color: #aaa;
