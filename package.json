@@ -32,7 +32,7 @@
         "connected-react-router": "6.3.2",
         "express": "4.17.1",
         "history": "4.9.0",
-        "immer": "6.0.3",
+        "immer": "9.0.6",
         "react": "17.0.1",
         "react-dom": "17.0.1",
         "react-helmet": "6.1.0",
